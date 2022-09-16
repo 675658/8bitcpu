@@ -1,0 +1,115 @@
+nop                         
+hlt                         
+push num    
+push reg
+pop reg     
+call num    
+call reg    
+ret
+jmp num
+jmp reg
+je num
+je reg
+jne num
+jne reg
+ja num
+ja reg
+jb num
+jb reg
+jc num
+jc reg
+jnc num
+jnc reg
+
+mov reg,num
+mov reg,reg
+mov reg,[num]
+mov reg,[reg]
+mov [num],reg
+mov [reg],reg
+
+add reg,num
+sub reg,num cmp reg,num
+and reg,num test reg,num
+or reg,num
+not reg
+xor reg,num
+shl reg,num
+shr reg,num
+
+add reg,reg
+sub reg,reg cmp reg,reg
+and reg,reg test reg,reg
+or reg,reg
+not reg,reg
+xor reg,reg
+shl reg,reg
+shr reg,reg
+
+
+mem_data_en:
+    m_en
+mem_data_sign_rw:
+    mem_rw
+mem_data_addr:
+    reg_buf_r1      00
+    reg_buf_r2      01
+    num             10
+    alu_e           11
+mem_data_buf_w:
+    jmp_pc_inc      00
+    reg_buf_r1      01
+    reg_buf_r2      10
+    num             11
+
+alu_en
+    a_en
+alu_a:
+    reg_buf_r1      0
+    reg_buf_r2      1
+alu_b:
+    reg_buf_r1      00
+    reg_buf_r2      01
+    num             10
+    alub            11
+alu_op:
+    a_op
+
+reg_en_r:
+    r_en_r
+reg_en_w:
+    r_en_w
+reg_addr_r1:
+    reg1
+reg_addr_r2:
+    reg2
+reg_addr_w1:
+    regw1
+reg_addr_w2:
+    regw2
+reg_buf_w1:
+    mem_data_buf_r  00
+    num             01
+    alu_e           10
+    reg_buf_r1      11
+reg_buf_w2:
+    mem_data_buf_r  00
+    num             01
+    alu_e           10
+    reg_buf_r2      11
+
+jmp_en:
+    j_en
+jmp_op:
+    j_op
+jmp_pc:
+    pc
+jmp_flage:
+    flage
+jmp_addr:
+    mem_data_buf_r  00
+    num             01
+    reg_buf_r1      10
+    reg_buf_r2      11
+
+

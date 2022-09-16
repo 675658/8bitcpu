@@ -1,0 +1,43 @@
+label:
+    \S+:
+
+num:
+    [01]+b
+    [0-9]+d
+    [0123456789abcdef]+h
+
+operation:
+    nop
+    hlt
+    push
+    pop
+    call
+    ret
+    jmp
+    je
+    jne
+    jz
+    jnz
+    ja
+    jb
+    jc
+    jnc
+    mov
+    add
+    sub
+    and
+    or
+    not
+    xor
+    shl
+    shr
+
+reg:
+    r0
+    r1
+    r2
+    r3
+    r4
+    r5
+    ps
+    null

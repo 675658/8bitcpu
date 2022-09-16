@@ -1,0 +1,96 @@
+reg:
+r0 r1 r2 r3 r4 r5 通用寄存器
+ps          栈地址寄存器
+null        空寄存器
+
+
+num         立即数寄存器/丢弃
+
+pc          指令指针
+flage       标志寄存器
+00000CSZ
+C:carry
+S:sign
+Z:zero
+
+reg：
+000 r0
+001 r1
+010 r2
+011 r3
+100 r4
+101 r5
+110 ps
+111 null
+
+ALU：
+000 add
+001 sub
+010 and
+011 or
+100 not
+101 xor
+110 shl
+111 shr
+
+jmp:
+000 jmp
+001 je
+010 jne
+011 ja
+100 jb
+101 jc
+110 jnc
+
+|0|0|00|000|?|????????|     nop
+|0|0|00|001|?|????????|     hlt
+|0|0|01|000|0|xxxxxxxx|     push num
+|0|0|01|000|1|xxx|?????|    push reg
+|0|0|01|001|?|xxx|?????|    pop reg
+|0|0|10|000|0|xxxxxxxx|     call num
+|0|0|10|000|1|xxx|?????|    call reg
+|0|0|10|001|?|????????|     ret
+|0|0|11|000|0|xxxxxxxx|     jmp num
+|0|0|11|000|1|xxx|?????|    jmp reg
+|0|0|11|001|0|xxxxxxxx|     je num
+|0|0|11|001|1|xxx|?????|    je reg
+|0|0|11|010|0|xxxxxxxx|     jne num
+|0|0|11|010|1|xxx|?????|    jne reg
+|0|0|11|011|0|xxxxxxxx|     ja num
+|0|0|11|011|1|xxx|?????|    ja reg
+|0|0|11|100|0|xxxxxxxx|     jb num
+|0|0|11|100|1|xxx|?????|    jb reg
+|0|0|11|101|0|xxxxxxxx|     jc num
+|0|0|11|101|1|xxx|?????|    jc reg
+|0|0|11|110|0|xxxxxxxx|     jnc num
+|0|0|11|110|1|xxx|?????|    jnc reg
+
+|0|1|000|xxx|xxxxxxxx|      mov reg,num
+|0|1|001|xxx|xxx|?????|     mov reg,reg
+|0|1|010|xxx|xxxxxxxx|      mov reg,[num]
+|0|1|011|xxx|xxx|?????|     mov reg,[reg]
+|0|1|110|xxx|xxxxxxxx|      mov [num],reg
+|0|1|111|xxx|xxx|?????|     mov [reg],reg
+
+|1|0|000|xxx|xxxxxxxx|      add reg,num
+|1|0|001|xxx|xxxxxxxx|      sub reg,num cmp reg,num
+|1|0|010|xxx|xxxxxxxx|      and reg,num test reg,num
+|1|0|011|xxx|xxxxxxxx|      or reg,num
+|1|0|100|xxx|xxxxxxxx|      not reg
+|1|0|101|xxx|xxxxxxxx|      xor reg,num
+|1|0|110|xxx|xxxxxxxx|      shl reg,num
+|1|0|111|xxx|xxxxxxxx|      shr reg,num
+
+|1|1|000|xxx|xxx|?????|     add reg,reg
+|1|1|001|xxx|xxx|?????|     sub reg,reg cmp reg,reg
+|1|1|010|xxx|xxx|?????|     and reg,reg test reg,reg
+|1|1|011|xxx|xxx|?????|     or reg,reg
+|1|1|100|xxx|xxx|?????|     not reg,reg
+|1|1|101|xxx|xxx|?????|     xor reg,reg
+|1|1|110|xxx|xxx|?????|     shl reg,reg
+|1|1|111|xxx|xxx|?????|     shr reg,reg
+
+      高电平     |    低电平    |
+取指->译码->执行->访存->写回->更新pc
+
+
